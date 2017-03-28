@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery-3.1.1.js"></script>
+	<script type="text/javascript">
+			//function sendInJSON(username, password){
+			//How do I tell JSON that username is #username? A: as far as I know, it should be fine?????????
+			//How do I tell JSON where to send the stringified data? A: Don't I do that in jquery?
+			//I need to decide when I want sendInJSON to execute. I don't want it to send until I've gotten the vals in handleClick. 
+				
+				/*var JSONusername = JSON.stringify(username);
+				var JSONpassword = JSON.stringify(password);
+				var xhttp = new XMLHttpRequest();
+
+				//TODO: is dis the right url tho
+				//TODO: do I make a string out of JSON vars tho
+				xhttp.open(POST, "http://localhost/series/dosthwdata.php", true, JSONusername,JSONpassword);
+				xhttp.send();
+				*/
+				$.ajax({
+					//Does the above have a way to access the value?
+					//add done and fail 
+					type: "POST",
+					url: "http://localhost/series/dosthwdata.php",
+					data: {"username" : handleClick.username}
+					//fix php so it responds with data!
+					success: function:(data){
+						$("#Response").prepend("<p> This Worked! </p>");
+					}
+				})
+			//} 
+
+		function handleClick(){
+						//Gets the value from the user input
+						var username = $("#username").val();
+						//Is this a variable or an object???????
+						var password = $("#password").val();
+						return false;
+		}	
+		//Maps the action to the submit click
+			$(document).ready(function(){
+				$("button").click(function(){
+					//When user clicks the submit button, get the value then stringify and send to the server.
+					$("#SendData").click(handleClick());
+
+				// Mysql can insert data, create a mysql doc and send data to it??
+
+				/*
+					$.post("dosthwdata.php", {
+						password:  password, //user input- I need to add another form submission piece. I need something to store the information in. 
+						username:  username //user input
+					});
+						
+				*/
+				});
+			});
+
+	</script>
+	<title></title>
+</head>
+<body>
+	<div style= text-align:center> 
+		<form>
+		<!-- Check if my syntax for the id is correct here --> 
+		<input  type="submit" name="Join a Classroom" value="Students: Join a Classroom">
+		<!--Fix the ugly-->
+		
+		<input type="submit" name="Create a Classroom" value="Teachers: Create a Classroom">	
+
+		<!--html form submission-->
+		</form>
+		<!-- Add a php page in the quotes for action that is on my server and will do a thing with the information. Having it add it to the db with mysql is another thing.-->
+		<form action="myfile.php" method="post">
+			<div style= text-align:center>
+						<input type="text" id="username" value="Username" name="username"/>
+						<input type="password" id="password" value="Password" name="password">
+						<input id="SendData" type="submit" value="Submit">
+					</div>
+		</form>
+	</div>
+	<div id="Response">yo</div>
+
+	
+</body>
+</html
